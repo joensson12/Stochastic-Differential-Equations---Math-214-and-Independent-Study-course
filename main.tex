@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+
+% ---------- Page and typography ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{microtype}
+
+% ---------- Math ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{bbm} % for \mathbbm{1} indicator
+
+% ---------- Lists, figures, links ----------
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% ---------- Short commands ----------
+% Sets and common objects
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Probability
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Law}{\mathcal{L}}
+\newcommand{\1}{\mathbbm{1}}
+
+% Calligraphic letters (use as needed)
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cB}{\mathcal{B}}
+
+% Notation helpers
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\given}{\,\middle|\,}
+\newcommand{\st}{\,:\,}
+
+% Norms and absolute values
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+
+% SDE / stochastic calculus
+\newcommand{\dW}{\dd W_t}
+\newcommand{\dB}{\dd B_t}
+\newcommand{\dt}{\dd t}
+\newcommand{\Ito}{It\^o}
+
+% ---------- Exercise numbering as x.y (chapter.exercise) ----------
+\newcounter{chap}
+\newcounter{ex}[chap]
+\renewcommand{\theex}{\arabic{chap}.\arabic{ex}}
+
+% Set current chapter number (resets exercise counter)
+\newcommand{\setchapter}[1]{%
+  \setcounter{chap}{#1}%
+  \setcounter{ex}{0}%
+}
+
+% Set the next exercise number within the current chapter
+% Example: after \setchapter{2}, \setexercise{3} makes the next exercise be 2.3
+\newcommand{\setexercise}[1]{%
+  \setcounter{ex}{\numexpr#1-1\relax}%
+}
+
+% Exercise environment: optional title
+\newenvironment{exercise}[1][]%
+{%
+  \refstepcounter{ex}%
+  \section*{Exercise \theex\if\relax\detokenize{#1}\relax\else\ (#1)\fi}%
+}%
+{}
+
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% ---------- Title info ----------
+\title{Independent study - Stochastic Differential Equations}
+\author{Johan J\"onsson}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% =======================
+% Example (Chapter 2, Exercise 9)
+% =======================
+\setchapter{2}
+
+% Force next one to be 2.9
+\setexercise{9}
+\begin{exercise}
+To illustrate that the (finite-dimensional) distributions alone do not give all the information regarding the continuity properties of a process, consider the following example:
+
+Let $(\Omega,\mathcal{F},P)=([0,\infty),\mathcal{B},\mu)$ where $\mathcal{B}$ denotes the Borel $\sigma$-algebra on $[0,\infty)$ and $\mu$ is a probability measure on $[0,\infty)$ with no mass on single points. Define
+\[
+X_t(\omega)=
+\begin{cases}
+1 & \text{if } t=\omega,\\
+0 & \text{otherwise}
+\end{cases}
+\]
+and
+\[
+Y_t(\omega)=0 \qquad \text{for all } (t,\omega)\in[0,\infty)\times[0,\infty).
+\]
+Prove that $\{X_t\}$ and $\{Y_t\}$ have the same distributions and that $X_t$ is a version of $Y_t$. And yet we have that $t\mapsto Y_t(\omega)$ is continuous for all $\omega$, while $t\mapsto X_t(\omega)$ is discontinuous for all $\omega$.
+
+\end{exercise}
+
+\begin{solution}
+By definition 2.2.2 we have that $\{X_t\}$ and $\{Y_t\}$ the same finite-dimensional distribution if
+\[
+\bP(\{ \omega : X_t(\omega)=Y_t(\omega)\})=1, \, \forall t
+\]
+we then can in fact show this is true for our case so that will be how we show that they equal in distribution.
+\[
+\bP(\{ \omega : X_t(\omega)=Y_t(\omega)\})=1-\bP(\{ \omega : X_t(\omega)\neq Y_t(\omega)\})
+\]
+Then we use that
+\[
+\bP(\{ \omega : X_t(\omega)\neq Y_t(\omega)\})=\bP(\{ \omega : X_t(\omega)\neq 0\})=\bP(\{ \omega : X_t(\omega)= 1\})=\bP(\{ t\})=0
+\]
+This holds since it had no mass in a single point. This means that for any $t$ we have that $\bP(\{ \omega : X_t(\omega)\neq Y_t(\omega)\})=0$. This gives that
+\[
+\bP(\{ \omega : X_t(\omega)=Y_t(\omega)\})=1-\bP(\{ \omega : X_t(\omega)\neq Y_t(\omega)\})=1-0=1, \, \forall t
+\]
+Specifically we proved something stronger which is that $\{X_t\}$ is a version of $\{Y_t\}$. 
+\end{solution}
+
+% =======================
+% Chapter 5, Exercise 1
+% =======================
+\setchapter{5}
+\setexercise{1}
+\begin{exercise}
+Verify that the given processes solve the given corresponding stochastic differential equations ($B_t$ denotes $1$-dimensional Brownian motion).
+
+\begin{enumerate}[label=(\roman*)]
+\item $X_t = e^{B_t}$ solves
+\[
+dX_t = \frac{1}{2}X_t\,dt + X_t\,dB_t.
+\]
+
+\item $X_t = \dfrac{B_t}{1+t}$, $B_0=0$ solves
+\[
+dX_t = -\frac{1}{1+t}X_t\,dt + \frac{1}{1+t}\,dB_t; \qquad X_0=0.
+\]
+
+\item $X_t = \sin(B_t)$ with $B_0=a \in \bigl(-\frac{\pi}{2},\frac{\pi}{2}\bigr)$ solves
+\[
+dX_t = -\frac{1}{2}X_t\,dt + \sqrt{1-X_t^2}\,dB_t
+\qquad \text{for } t < \inf\{s>0: B_s \notin \bigl[-\tfrac{\pi}{2},\tfrac{\pi}{2}\bigr]\}.
+\]
+
+\item $(X_1(t),X_2(t)) = (t, e^{t}B_t)$ solves
+\[
+\begin{bmatrix}
+dX_1\\
+dX_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+X_2
+\end{bmatrix}dt
++
+\begin{bmatrix}
+0\\
+e^{X_1}
+\end{bmatrix}dB_t.
+\]
+
+\item $(X_1(t),X_2(t)) = (\cosh(B_t),\sinh(B_t))$ solves
+\[
+\begin{bmatrix}
+dX_1\\
+dX_2
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+X_1\\
+X_2
+\end{bmatrix}dt
++
+\begin{bmatrix}
+X_2\\
+X_1
+\end{bmatrix}dB_t.
+\]
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+
+\begin{enumerate}[label=(\roman*)]
+\item 
+
+We begin to observe that 
+\[
+X_t=g(t,B_t)=e^{B_t} \implies \frac{\partial g}{\partial t}(t,x)=0, \, \frac{\partial g}{\partial x}(t,B_t)=e^{B_t}, \, \frac{\partial^2 g}{\partial x^2}(t,B_t)= e^{B_t} 
+\]
+
+\[
+dX_t=\frac{\partial g}{\partial t}(t,B_t)\,dt+\frac{\partial g}{\partial x}(t,B_t)\,dB_t+\frac{1}{2}\frac{\partial^2 g}{\partial x^2}(t,B_t)\cdot(dB_t)^2=
+\]
+\[
+e^{B_t}dB_t+ \frac{1}{2} e^{B_t}  \cdot(dB_t)^2 = e^{B_t}dB_t+\frac{1}{2} e^{B_t}  dt= \frac{1}{2}X_t\,dt + X_t\,dB_t
+\]
+
+\item We begin to observe that
+\[
+X_t =g(t,B_t)= \dfrac{B_t}{1+t}, \, B_0=0 \implies \frac{\partial g}{\partial t}(t,x)=\dfrac{-B_t}{(1+t)^2}, \, \frac{\partial g}{\partial x}(t,B_t)=\dfrac{1}{1+t}, \, \frac{\partial^2 g}{\partial x^2}(t,B_t)= 0 
+\]
+\[
+dX_t=\frac{\partial g}{\partial t}(t,B_t)\,dt+\frac{\partial g}{\partial x}(t,B_t)\,dB_t+\frac{1}{2}\frac{\partial^2 g}{\partial x^2}(t,B_t)\cdot(dB_t)^2=
+\]
+\[
+\dfrac{-B_t}{(1+t)^2}dt+ \dfrac{1}{1+t}  \cdot dB_t  = -\frac{1}{1+t}X_t\,dt + \frac{1}{1+t}\,dB_t
+\]
+
+\item We begin to observe that
+
+\[
+X_t =g(t,B_t)= \sin(B_t), \,B_0=a \in \bigl(-\frac{\pi}{2},\frac{\pi}{2}\bigr) \implies 
+\]
+\[
+\frac{\partial g}{\partial t}(t,x)=0, \, \frac{\partial g}{\partial x}(t,B_t)=\cos(B_t), \, \frac{\partial^2 g}{\partial x^2}(t,B_t)= -\sin(B_t) 
+\]
+\[
+dX_t=\frac{\partial g}{\partial t}(t,B_t)\,dt+\frac{\partial g}{\partial x}(t,B_t)\,dB_t+\frac{1}{2}\frac{\partial^2 g}{\partial x^2}(t,B_t)\cdot(dB_t)^2=
+\]
+\[
+\cos(B_t)  \cdot dB_t  -\frac{1}{2}\sin(B_t) \cdot(dB_t)^2=  \sqrt{1-\sin(B_t)^2}\cdot dB_t  -\frac{1}{2}\sin(B_t) dt= -\frac{1}{2}X_t\,dt + \sqrt{1-X_t^2}\,dB_t
+\]
+Which holds for $t < \inf\{s>0: B_s \notin \bigl[-\tfrac{\pi}{2},\tfrac{\pi}{2}\bigr]\}$.
+
+\item We begin to observe that
+\[
+(X_1(t),X_2(t)) = (g_1(t,B_t),g_1(t,B_t))=(t, e^{t}B_t) \implies
+\]
+\[
+\frac{\partial g_1}{\partial t}(t,X)=1, \, \frac{\partial g_2}{\partial t}(t,X)=e^{t}B_t, \, 
+\]
+\[
+dY_k=\frac{\partial g_k}{\partial t}(t,X)\,dt+\sum_i \frac{\partial g_k}{\partial x_i}(t,X)\,dX_i+\frac{1}{2}\sum_{i,j}\frac{\partial^2 g_k}{\partial x_i\partial x_j}(t,X)\,dX_i\,dX_j
+\]
+
+
+\end{enumerate}
+
+
+\end{solution}
+
+
+\end{document}
+
