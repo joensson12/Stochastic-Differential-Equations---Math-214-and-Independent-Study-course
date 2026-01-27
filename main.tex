@@ -249,14 +249,37 @@ Which holds for $t < \inf\{s>0: B_s \notin \bigl[-\tfrac{\pi}{2},\tfrac{\pi}{2}\
 (X_1(t),X_2(t)) = (g_1(t,B_t),g_1(t,B_t))=(t, e^{t}B_t) \implies
 \]
 \[
-\frac{\partial g_1}{\partial t}(t,X)=1, \, \frac{\partial g_2}{\partial t}(t,X)=e^{t}B_t, \, 
+\frac{\partial g_1}{\partial t}(t,X)=1, \, \frac{\partial g_2}{\partial t}(t,B_t)=e^{t}B_t, \, \frac{\partial g_1}{\partial x}(t,B_t)=0, \frac{\partial g_2}{\partial x}(t,B_t)=e^t,
 \]
 \[
-dY_k=\frac{\partial g_k}{\partial t}(t,X)\,dt+\sum_i \frac{\partial g_k}{\partial x_i}(t,X)\,dX_i+\frac{1}{2}\sum_{i,j}\frac{\partial^2 g_k}{\partial x_i\partial x_j}(t,X)\,dX_i\,dX_j
+\frac{\partial g_1}{\partial x^2}(t,B_t) = 0, \, \frac{\partial g_2}{\partial x^2}(t,B_t)=0
+\]
+Then we get that
+\[
+dX_1=1\,dt, \, dX_2=e^tB_t\,dt+e^t\,dB_{t}=X_2 \, dt + e^{X_1} d B_t
+\]
+\item We begin to observe that
+\[
+(X_1(t),X_2(t)) = (g_1(t,B_t),g_1(t,B_t))=(\cosh(B_t), \sinh(B_t))=\left(\dfrac{e^{B_t}+e^{-B_t}}{2},\,\dfrac{e^{B_t}-e^{-B_t}}{2}\right)
+ \implies
 \]
 
+\[
+\frac{\partial g_1}{\partial t}(t,X)=0, \, \frac{\partial g_2}{\partial t}(t,B_t)=0, \, \frac{\partial g_1}{\partial x}(t,B_t)=\sinh(B_t), \frac{\partial g_2}{\partial x}(t,B_t)=\cosh(B_t)
+\]
+\[
+\frac{\partial g_1}{\partial x^2}(t,B_t) = \cosh(B_t), \, \frac{\partial g_2}{\partial x^2}(t,B_t)=\sinh(B_t)
+\]
+Then we get that
+\[
+dX_1=\sinh(B_t)\,dB_{t}+\frac{1}{2}\cosh(B_t)\,dB_{t}\,dB_{t}=\sinh(B_t)\,dB_{t}+\frac{1}{2}\cosh(B_t)\,dt = X_2 \,dB_{t} + \frac{1}{2}X_1\,dt
+\]
+\[
+dX_1=\cosh(B_t)\,dB_{t}+\frac{1}{2}\sinh(B_t)\,dB_{t}\,dB_{t}=\cosh(B_t)\,dB_{t}+\frac{1}{2}\sinh(B_t)\,dt = X_1 \,dB_{t} + \frac{1}{2}X_2\,dt
+\]
 
 \end{enumerate}
+
 
 
 \end{solution}
