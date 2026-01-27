@@ -88,7 +88,10 @@
 \begin{document}
 
 \maketitle
-\tableofcontents
+\section*{Introduction}
+This document collects a selection of exercises I worked through from Bernt \O ksendal, \emph{Stochastic Differential Equations: An Introduction with Applications}. These solutions were completed as part of my MATH 199 independent study with Professor Ang at UC San Diego. The document serves as a brief record of the topics and problem-solving work I carried out during the course.
+
+
 
 % =======================
 % Example (Chapter 2, Exercise 9)
@@ -281,6 +284,82 @@ dX_1=\cosh(B_t)\,dB_{t}+\frac{1}{2}\sinh(B_t)\,dB_{t}\,dB_{t}=\cosh(B_t)\,dB_{t}
 \end{enumerate}
 
 
+
+\end{solution}
+
+
+% =======================
+% Chapter 5, Exercise 4*
+% =======================
+\setchapter{5}
+\setexercise{4}
+\begin{exercise}
+Solve the following stochastic differential equations:
+
+\begin{enumerate}[label=(\roman*)]
+\item
+\[
+\begin{bmatrix}
+dX_1\\
+dX_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}dt
++
+\begin{bmatrix}
+1 & 0\\
+0 & X_1
+\end{bmatrix}
+\begin{bmatrix}
+dB_1\\
+dB_2
+\end{bmatrix}.
+\]
+
+\item
+\[
+dX_t = X_t\,dt + dB_t.
+\]
+(Hint: Multiply both sides with ``the integrating factor'' $e^{-t}$ and compare with $d(e^{-t}X_t)$)
+
+\item
+\[
+dX_t = -X_t\,dt + e^{-t}\,dB_t.
+\]
+\end{enumerate}
+
+\end{exercise}
+
+\begin{solution}
+
+\begin{enumerate}[label=(\roman*)]
+
+
+\item
+We take the integral form
+\[
+X_1(t)=\int_0^tdX_1 = \int_0^t ds + \int_0^tdB_1=X_1(0)+t+B_1(t)
+\]
+Which gives us that
+\[
+X_2(t)=\int_0^tdX_2 = \int_0^t X_1(0)+s+B_1(s) dB_2=X_2(0)+X_1(0)B_2(t)+\int_0^t s dB_2  +\int_0^t B_1(s) dB_2
+\]
+\item
+We take the hint and rewrite the following
+\[
+e^{-t}dX_t = e^{-t}X_t\,dt + e^{-t}dB_t \implies e^{-t}\,dX_t- e^{-t}X_t\,dt=  e^{-t}dB_t
+\]
+We recognize that $d(e^{-t}X_t)=e^{-t}\,dX_t- e^{-t}X_t\,dt$ thus we get that
+\[
+\int_0^t d(e^{-s}X_s) ds = \int_0^t e^{-s}dB_s \implies X_t=X_0e^{t}+\int_0^t e^{t-s}dB_s
+\]
+
+\item
+
+\end{enumerate}
 
 \end{solution}
 
