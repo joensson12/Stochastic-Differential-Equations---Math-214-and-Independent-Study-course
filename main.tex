@@ -358,7 +358,81 @@ We recognize that $d(e^{-t}X_t)=e^{-t}\,dX_t- e^{-t}X_t\,dt$ thus we get that
 \]
 
 \item
+\[
+dX_t = -X_t\,dt + e^{-t}\,dB_t \implies e^{t}dX_t+e^{t}X_t\,dt =  1\,dB_t 
+\]
+We observe that $e^{t}dX_t+e^{t}X_t\,dt=d(e^{t}X_t)$
+\[
+\int_0^t d(e^{s}X_s) \,ds = \int_0^t 1\,dB_s \implies X_t=(B_t+X_0)e^{-t}
+\]
+\end{enumerate}
 
+\end{solution}
+
+\setchapter{5}
+\setexercise{5}
+\begin{exercise}
+\begin{enumerate}[label=\alph*)]
+\item Solve the \emph{Ornstein-Uhlenbeck equation} (or \emph{Langevin equation})
+\[
+dX_t=\mu X_t\,dt+\sigma\,dB_t
+\]
+where $\mu,\sigma$ are real constants, $B_t\in\mathbb{R}$.
+
+The solution is called the \emph{Ornstein-Uhlenbeck process}. (Hint: See Exercise 5.4 (ii).)
+
+\item Find $\E[X_t]$ and $\Var[X_t]:=\E\bigl[(X_t-\E[X_t])^2\bigr]$.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+
+\begin{enumerate}[label=\alph*)]
+
+\[
+e^{\mu t}dX_t=\mu e^{\mu t}X_t\,dt+\sigma e^{\mu t}\,dB_t \implies d(X_te^{\mu t})=\sigma e^{\mu t}\,dB_t
+\]
+Thus we integrate again
+\[
+\int_0^t d(X_te^{-\mu s}) \,ds = X_te^{\mu t}-X_0=\int_0^t \sigma e^{-\mu s}\,dB_s \implies
+\]
+\[
+X_t=X_0e^{\mu t}+\int_0^t \sigma e^{-\mu (s-t)}\,dB_s
+\]
+
+\item Find $\E[X_t]$ and $\Var[X_t]:=\E\bigl[(X_t-\E[X_t])^2\bigr]$.
+
+\[
+\E[X_t]=\E[X_0e^{\mu t}+\int_0^t \sigma e^{-\mu (s-t)}\,dB_s]=\E[X_0]e^{\mu t}+\sigma \E[\int_0^t  e^{-\mu (s-t)}\,dB_s]=\E[X_0]e^{\mu t}
+\]
+Then we want to find
+\[
+\Var[X_t]:=\E\bigl[(X_t-\E[X_t])^2\bigr]=\E\bigl[X_t^2\bigr]-(\E[X_0]e^{\mu t})^2
+\]
+Thus we solve the
+\[
+\E\bigl[X_t^2\bigr]=\E\bigl[(X_0e^{\mu t}+\int_0^t \sigma e^{-\mu (s-t)}\,dB_s)^2\bigr]=
+\]
+\[
+\E\bigl[X_0^2\bigr]e^{2\mu t}+2\E\bigl[X_0e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s\bigr]+\E\bigl[(\int_0^t \sigma e^{-\mu (s-t)}\,dB_s)^2\bigr]=
+\]
+\[
+\E\bigl[X_0^2\bigr]e^{2\mu t}+2\E\bigl[X_0e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s\bigr]+\E\bigl[\int_0^t (\sigma e^{-\mu (s-t)})^2\,dt\bigr]=
+\]
+\[
+\E\bigl[X_0^2\bigr]e^{2\mu t}+2\E\bigl[X_0e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s\bigr]+\frac{\sigma^2}{2\mu}\bigl(e^{2\mu t}-1\bigr)
+\]
+We know analyze this
+\[
+\E\bigl[X_0e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s\bigr]=\E\bigl[\E\bigl[X_0e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s \mid \mathcal{F}_0\bigr]\bigr]=
+\]
+\[
+\E\bigl[X_0\E\bigl[e^{\mu t} \int_0^t \sigma e^{-\mu (s-t)}\,dB_s \mid \mathcal{F}_0\bigr]\bigr]=\E\bigl[X_0 \cdot 0\bigr]=0
+\]
+Thus we get that
+\[
+\Var[X_t]=(\E\bigl[X_0^2\bigr]-\E[X_0]^2)e^{2\mu t}+\frac{\sigma^2}{2\mu}\bigl(e^{2\mu t}-1\bigr)=\Var\bigl[X_0e^{\mu t}\bigr]+\frac{\sigma^2}{2\mu}\bigl(e^{2\mu t}-1\bigr)
+\]
 \end{enumerate}
 
 \end{solution}
