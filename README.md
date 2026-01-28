@@ -11,7 +11,7 @@ where \(W_t\) is Brownian motion.
 ## Example output
 Below is a Monte Carlo visualization of simulated SDE paths over time (sample trajectories, density shading, and summary statistics).
 
-![Simulated SDE paths and empirical density](sde_paths_density_plot.png)
+![Simulated SDE paths and empirical density](Nurmerical solutions/sde_paths_density_plot.png)
 
 ## What this project covers
 - **Ito calculus foundations** (Ito integral, Ito formula, existence/uniqueness concepts)
