@@ -2,8 +2,11 @@
 Coursework and independent study project from **UC San Diego Math 214** and an **independent study in stochastic calculus**, focused on **simulating, analyzing, and validating SDE models**.
 
 ## What is an SDE?
-An SDE models a state variable with both deterministic drift and random fluctuations, typically written dXₜ = b(Xₜ,t) dt + σ(Xₜ,t) dWₜ, where Wₜ is Brownian motion.
+An SDE models a state variable with both deterministic drift and random fluctuations, typically written 
 
+$dX_t = b(X_t,t)dt + \sigma(X_t,t)dB_t$
+
+where $B_t$ is Brownian motion.
 
 ## Example output
 Below is a Monte Carlo visualization of simulated SDE paths over time (sample trajectories, density shading, and summary statistics).
