@@ -19,5 +19,5 @@ Below is a Monte Carlo visualization of simulated SDE paths over time (sample tr
 - **Numerical SDE solvers** (From baseline schemes like Euler–Maruyama to more advanced model-specific methods, including using Physics-Informed Neural Networks (PINNs) to approximate SDE dynamics and related PDEs.)
 
 
-This is intentionally kept simple and self-contained: the goal is to demonstrate correct stochastic modeling workflow end to end, from SDE specification to simulation, diagnostics, and interpretation.
+
 
