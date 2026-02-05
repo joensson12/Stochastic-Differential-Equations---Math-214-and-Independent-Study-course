@@ -3,7 +3,7 @@
 % ---------- Page and typography ----------
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{microtype}
-
+\usepackage{todonotes}
 % ---------- Math ----------
 \usepackage{amsmath,amssymb,amsthm,mathtools,bm}
 \usepackage{bbm} % for \mathbbm{1} indicator
@@ -519,6 +519,144 @@ Which means that we can take $C=D=2$ so we can conclude by the Theorem $5.2.1$ t
 \caption{Simulated SDE paths with density, percentiles, and $+1$ standard deviation band.}
 \end{figure}
 
+\end{solution}
+
+% =======================
+% Chapter 7, Exercise 1*
+% =======================
+\setchapter{7}
+\setexercise{1}
+\begin{exercise}
+Find the generator of the following It\^o diffusions:
+
+\begin{enumerate}[label=\alph*)]
+\item $dX_t=\mu X_t\,dt+\sigma\,dB_t$ (The Ornstein-Uhlenbeck process) $(B_t\in\R;\ \mu,\sigma\ \text{constants}).$
+
+\item $dX_t=rX_t\,dt+\alpha X_t\,dB_t$ (The geometric Brownian motion) $(B_t\in\R;\ r,\alpha\ \text{constants}).$
+
+\item $dY_t=r\,dt+\alpha Y_t\,dB_t$ $(B_t\in\R;\ r,\alpha\ \text{constants}).$
+
+\item
+\[
+dY_t=
+\begin{bmatrix}
+dt\\
+dX_t
+\end{bmatrix},
+\qquad\text{where } X_t \text{ is as in a)}.
+\]
+
+\item
+\[
+\begin{bmatrix}
+dX_1\\
+dX_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+X_2
+\end{bmatrix}dt
++
+\begin{bmatrix}
+0\\
+e^{X_1}
+\end{bmatrix}dB_t,
+\qquad (B_t\in\R).
+\]
+
+\item
+\[
+\begin{bmatrix}
+dX_1\\
+dX_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}dt
++
+\begin{bmatrix}
+1 & 0\\
+0 & X_1
+\end{bmatrix}
+\begin{bmatrix}
+dB_1\\
+dB_2
+\end{bmatrix}.
+\]
+
+\item $X(t)=(X_1,\dots,X_n)$, where
+\[
+dX_k(t)=r_k X_k\,dt+X_k\cdot\sum_{j=1}^n \alpha_{kj}\,dB_j,\qquad 1\le k\le n,
+\]
+and $(B_1,\dots,B_n)$ is Brownian motion in $\R^n$, and $r_k,\alpha_{kj}$ are constants.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+We will use Theorem 7.3.3. Let $X_t$ be the It\^o diffusion
+\[
+dX_t=b(X_t)\,dt+\sigma(X_t)\,dB_t.
+\]
+If $f\in C_0^2(\R^n)$, then $f\in D_A$ and the generator $A$ is given by
+\[
+Af(x)=\sum_i b_i(x)\frac{\partial f}{\partial x_i}
++\frac12\sum_{i,j}(\sigma\sigma^T)_{i,j}(x)\frac{\partial^2 f}{\partial x_i\,\partial x_j}.
+\]
+
+\begin{enumerate}[label=\alph*)]
+
+
+
+\item 
+
+We apply the formula from above
+
+
+\[
+Af(x)=\mu x\frac{d f}{d x}
++\frac12 \sigma^2\frac{d^2 f}{d x^2}.
+\]
+
+
+\item
+We apply the formula from above
+\[
+Af(x)=r x\frac{d f}{d x}
++\frac12 \alpha^2x^2\frac{d^2 f}{d x^2}.
+\]
+
+\item
+We apply the formula from above
+\[
+Af(x)=r x\frac{d f}{d y}
++\frac12 \alpha^2y^2\frac{d^2 f}{d y^2}.
+\]
+
+\item
+\todo{Why is is $\frac{\partial f}{\partial t}$ not $\frac{\partial f}{\partial x}?$}
+\[
+Af(x)=\frac{\partial f}{\partial t}+(\mu x)\frac{\partial f}{\partial x}
++\frac12 \sigma^2\frac{\partial^2 f}{\partial x^2}.
+\]
+
+\item
+\[
+Af(x)=\frac{\partial f}{\partial x_1}+x\frac{\partial f}{\partial x_2}
++\frac12 e^{2x}\frac{\partial^2 f}{\partial^2 x_2}.
+\]
+
+
+\item
+\[
+Af(x)=\frac{\partial f}{\partial x_1}
++\frac12 \frac{\partial^2 f}{\partial^2 x_1}+\frac12 x^2\frac{\partial^2 f}{\partial^2 x_2}
+\]
+
+\item
+\end{enumerate}
 \end{solution}
 
 
